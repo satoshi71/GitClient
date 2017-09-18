@@ -21,7 +21,7 @@ func main_manu(){
 	fmt.Println("2. 追加したファイルを取り消し")
 	fmt.Println("3. コミット")
 	fmt.Println("4. リモートリポジトリURL設定")
-	fmt.Println("6: push")
+	fmt.Println("5: リモートリポジトリにpush")
 	fmt.Println("99: exit")
 	fmt.Println()
 	fmt.Printf("番号を選んでください。: ")
@@ -38,9 +38,38 @@ func main_manu(){
 	case 4:
 		setURL_menu()
 	case 5:
-		//push()
+		push_menu()
 	case 99:
 		//push()
+	}
+}
+
+func push_menu(){
+	fmt.Println();
+	fmt.Println("/_/_/_/_ Push Manu /_/_/_/_/")
+	fmt.Println()
+	fmt.Println("1. pushする")
+	fmt.Println("99. Main Menu に戻る")
+	fmt.Println()	
+	fmt.Printf("番号を選んでください。: ")
+	var ans int
+	fmt.Scan(&ans)
+
+	if ans==1{
+		out, err := exec.Command("git", "push", "origin", "master").Output()
+		if err != nil {
+			fmt.Println("commitに失敗しました。 ")
+			fmt.Println(err)
+		}else{
+			fmt.Println("pushしました。 ")
+			fmt.Println(out)
+		}
+		time.Sleep(1 * time.Second)
+	}else if ans==99{
+		main_manu()		
+	}else{
+		fmt.Println("不正の操作です。")
+		push_menu()
 	}
 }
 
