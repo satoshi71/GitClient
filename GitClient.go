@@ -58,8 +58,8 @@ func push_menu(){
 	if ans==1{
 		out, err := exec.Command("git", "push", "origin", "master").Output()
 		if err != nil {
-			fmt.Println("commitに失敗しました。 ")
-			fmt.Println(err)
+			fmt.Println("pushに失敗しました。 ")
+			fmt.Println(out)
 		}else{
 			fmt.Println("pushしました。 ")
 			fmt.Println(out)
@@ -168,7 +168,7 @@ func add_menu(code int){
 				var filestatus string
 				mess := "--"
 				if(len(string(out)) < 2){
-					mess = "追加済み"
+					mess = "commit済み"
 				}else{
 					filestatus = strings.TrimSpace(string(out)[0:2])					
 				}
