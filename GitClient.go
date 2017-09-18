@@ -142,7 +142,6 @@ func commit_menu(){
 }
 
 func add_menu(code int){
-	//fmt.Println("\033[2J");
     dir, _ := os.Getwd() //カレントディレクトリ
     files, err := ioutil.ReadDir(dir)
     if err != nil {
