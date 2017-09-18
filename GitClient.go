@@ -40,7 +40,11 @@ func main_manu(){
 	case 5:
 		push_menu()
 	case 99:
-		//push()
+		goodby()
+	default:
+		fmt.Println("入力した番号が間違っています。やり直してください。")
+		time.Sleep(1 * time.Second)
+		main_manu()
 	}
 }
 
@@ -69,7 +73,8 @@ func push_menu(){
 	}else if ans==99{
 		main_manu()		
 	}else{
-		fmt.Println("不正の操作です。")
+		fmt.Println("入力した番号が間違っています。やり直してください。")
+		time.Sleep(1 * time.Second)
 		push_menu()
 	}
 }
@@ -86,8 +91,16 @@ func setURL_menu(){
 			var ans string
 			fmt.Scan(&ans)
 			if ans!="99"{
-				exec.Command("git", "remote", "add", "origin", ans).Run()
-				setURL_menu()
+				out2, err2 := exec.Command("git", "remote", "add", "origin", ans).Output()
+				if err2!=nil{
+					fmt.Println("設定失敗!")
+					fmt.Println(string(out2))
+				}else{
+					fmt.Println("以下のURLに設定しました。")
+					out3, _ := exec.Command("git", "remote", "-v").Output()
+					fmt.Println(string(out3))
+				}
+				time.Sleep(1 * time.Second)
 			}	
 		}else{
 			fmt.Println("リモートリポジトリのURLは以下の通り設定されています。変更しますか？")
@@ -96,8 +109,16 @@ func setURL_menu(){
 			var ans string
 			fmt.Scan(&ans)
 			if ans!="99"{
-				exec.Command("git", "remote", "set-url", "origin", ans).Run()
-				setURL_menu()
+				out2, err2 := exec.Command("git", "remote", "set-url", "origin", ans).Output()
+				if err2!=nil{
+					fmt.Println("設定失敗!")
+					fmt.Println(string(out2))
+				}else{
+					fmt.Println("以下のURLに設定しました。")
+					out3, _ := exec.Command("git", "remote", "-v").Output()
+					fmt.Println(string(out3))
+				}
+				time.Sleep(1 * time.Second)	
 			}
 		}
 	}
@@ -136,6 +157,10 @@ func commit_menu(){
 			}else{
 			fmt.Println("commitを取り消しました。 ")
 		}
+	}else{
+		fmt.Println("入力した番号が間違っています。やり直してください。")
+		time.Sleep(1 * time.Second)
+		commit_menu()
 	}
 	time.Sleep(1 * time.Second)
 	main_manu()
@@ -192,12 +217,18 @@ func add_menu(code int){
 	if ans==99{
 		main_manu()
 	}else{
-		if code==0 {
-			exec.Command("git", "add", paths[ans]).Run()
+		if ans<len(paths){
+			if code==0 {
+				exec.Command("git", "add", paths[ans]).Run()
+			}else{
+				exec.Command("git", "reset", paths[ans]).Run()
+			}
+			add_menu(code)
 		}else{
-			exec.Command("git", "reset", paths[ans]).Run()
+			fmt.Println("入力した番号が間違っています。やり直してください。")
+			time.Sleep(1 * time.Second)
+			add_menu(code)
 		}
-		add_menu(code)
 	}
 }
 
@@ -222,4 +253,9 @@ func initial(){
 
 func getCommitMessage() string{
 	return "Commit " + time.Now().Format("2006-01-02 15:04:05")
+}
+
+func goodby(){
+	fmt.Println("終了します。")
+	time.Sleep(1 * time.Second)
 }
