@@ -64,12 +64,14 @@ func push_menu(){
 		if err != nil {
 			fmt.Println("pushに失敗しました。 ")
 			fmt.Println(string(out))
+			time.Sleep(1 * time.Second)
+			push_menu()
 		}else{
 			fmt.Println("pushしました。 ")
-			fmt.Println(out)
+			fmt.Println(string(out))
+			time.Sleep(1 * time.Second)
+			main_manu()
 		}
-		time.Sleep(1 * time.Second)
-		push_menu()
 	}else if ans==99{
 		main_manu()		
 	}else{
