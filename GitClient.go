@@ -165,8 +165,13 @@ func add_menu(code int){
 			paths = append(paths, file.Name())
 			out, err := exec.Command("git", "status", file.Name(), "-s").Output() //ファイルごとのstatus
 			if(err==nil){
+				var filestatus string
 				mess := "--"
-				filestatus := strings.TrimSpace(string(out)[0:2])
+				if(len(string(out)) < 2){
+					mess = "追加済み"
+				}else{
+					filestatus = strings.TrimSpace(string(out)[0:2])					
+				}
 				if filestatus=="M" || filestatus=="AM" { mess = "内容変更あり" }
 				if filestatus=="A" { mess = "追加済み" }
 				if filestatus=="R" { mess = "ファイル名変更" }
