@@ -59,12 +59,13 @@ func push_menu(){
 		out, err := exec.Command("git", "push", "origin", "master").Output()
 		if err != nil {
 			fmt.Println("pushに失敗しました。 ")
-			fmt.Println(out)
+			fmt.Println(string(out))
 		}else{
 			fmt.Println("pushしました。 ")
 			fmt.Println(out)
 		}
 		time.Sleep(1 * time.Second)
+		push_menu()
 	}else if ans==99{
 		main_manu()		
 	}else{
