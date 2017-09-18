@@ -56,7 +56,7 @@ func push_menu(){
 	fmt.Scan(&ans)
 
 	if ans==1{
-		out, err := exec.Command("git", "push", "origin", "master").Output()
+		out, err := exec.Command("git", "push", "-u", "origin", "master").Output()
 		if err != nil {
 			fmt.Println("pushに失敗しました。 ")
 			fmt.Println(string(out))
