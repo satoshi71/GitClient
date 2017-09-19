@@ -5,7 +5,6 @@ import (
 	"os/exec"
     "io/ioutil"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -197,14 +196,16 @@ func add_menu(code int){
 				if(len(string(out)) < 2){
 					mess = "commit済み"
 				}else{
-					filestatus = strings.TrimSpace(string(out)[0:2])					
+					//filestatus = strings.TrimSpace(string(out)[0:2])
+					filestatus = string(out)[0:2]			
 				}
-				if filestatus=="M" || filestatus=="AM" { mess = "内容変更あり" }
-				if filestatus=="A" { mess = "追加済み" }
-				if filestatus=="R" { mess = "ファイル名変更" }
+				if filestatus==" M" || filestatus=="AM" || filestatus=="MM" { mess = "内容変更あり" }
+				if filestatus==" A" { mess = "追加済み" }
+				if filestatus=="M " { mess = "追加済み" }
+				if filestatus==" R" { mess = "ファイル名変更" }
 				if filestatus=="??" { filestatus="--" }
 				//fmt.Println(string(out))
-				fmt.Printf("%d: %s\t%s:%s\n", cnt, file.Name(), filestatus, mess)
+				fmt.Printf("%d: %s\t [%s]:%s\n", cnt, file.Name(), filestatus, mess)
 				cnt++
 			}
         }
