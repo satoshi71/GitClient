@@ -211,7 +211,7 @@ func add_menu(code int){
 				if filestatus==" R" { mess = "ファイル名変更" }
 				if filestatus=="??" { filestatus="--" }
 				//fmt.Println(string(out))
-				fmt.Printf("%d: %s\t [%s]:%s\n", cnt, file.Name(), filestatus, mess)
+				fmt.Printf("%d: %s   [%s]:%s\n", cnt, file.Name(), filestatus, mess)
 				cnt++
 			}
         }
