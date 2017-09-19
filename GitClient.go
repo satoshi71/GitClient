@@ -64,6 +64,7 @@ func push_menu(){
 	fmt.Scan(&ans)
 
 	if ans==1{
+		fmt.Printf("push中...")
 		out, err := exec.Command("git", "push", "-u", "origin", "master").Output()
 		if err != nil {
 			fmt.Println("pushに失敗しました。 ")
@@ -205,7 +206,7 @@ func add_menu(code int){
 					filestatus = string(out)[0:2]			
 				}
 				if filestatus==" M" || filestatus=="AM" || filestatus=="MM" { mess = "内容変更あり" }
-				if filestatus==" A" { mess = "追加済み" }
+				if filestatus==" A" || filestatus=="A " { mess = "追加済み" }
 				if filestatus=="M " { mess = "追加済み" }
 				if filestatus==" R" { mess = "ファイル名変更" }
 				if filestatus=="??" { filestatus="--" }
