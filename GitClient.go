@@ -48,12 +48,17 @@ func main_manu(){
 }
 
 func push_menu(){
+	remoteURL, _ := exec.Command("git", "remote", "-v").Output()
+
 	fmt.Println();
 	fmt.Println("/_/_/_/_ Push Manu /_/_/_/_/")
 	fmt.Println()
 	fmt.Println("1. pushする")
 	fmt.Println("99. Main Menu に戻る")
 	fmt.Println()	
+	fmt.Println("※現在、以下のリモートリポジトリのURLが設定されています。")
+	fmt.Println(string(remoteURL))
+	fmt.Println()
 	fmt.Printf("番号を選んでください。: ")
 	var ans int
 	fmt.Scan(&ans)
@@ -261,4 +266,5 @@ func getCommitMessage() string{
 func goodby(){
 	fmt.Println("終了します。")
 	time.Sleep(1 * time.Second)
+	os.Exit(0)
 }
