@@ -1,5 +1,10 @@
 package main
 
+/*
+	GitClient
+	簡易的なGitClientアプリです。
+*/
+
 import (
     "fmt"
 	"os/exec"
