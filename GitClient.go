@@ -207,7 +207,6 @@ func add_menu(code int){
 				if(len(string(out)) < 2){
 					mess = "commit済み"
 				}else{
-					//filestatus = strings.TrimSpace(string(out)[0:2])
 					filestatus = string(out)[0:2]			
 				}
 				if filestatus==" M" || filestatus=="AM" || filestatus=="MM" { mess = "内容変更あり" }
